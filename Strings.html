@@ -324,6 +324,7 @@ function isPalindrome(str) {
 }
 console.log("isPalindrome('')", isPalindrome(""))
 console.log("isPalindrome('a')", isPalindrome("a"))
+console.log("isPalindrome('aa')", isPalindrome("aa"))
 console.log("isPalindrome('aba')", isPalindrome("aba"))
 console.log("isPalindrome('abba')", isPalindrome("abba"))
 console.log("isPalindrome('abaaa')", isPalindrome("abaaa"))
@@ -349,7 +350,6 @@ function longestPalindrome(str) {
             (inner < str.length) && (longestStr.length < str.length - outer);
             inner++
         ){
-            console.log("outer: " + outer + " inner: "+inner);
             tempStr += str[inner];
             if (isPalindrome(tempStr) && longestStr.length < tempStr.length) {
                 longestStr = tempStr;
@@ -367,30 +367,6 @@ console.log("longestPalindrome('abaaa')", longestPalindrome("abaaa"))
 console.log("longestPalindrome('testaatcde')", longestPalindrome("testaatcde"))
 console.log("longestPalindrome('cccbbbccc')", longestPalindrome("cccbbbccc"))
 console.log("longestPalindrome('abcdefg')", longestPalindrome("abcdefg"))
-
-// function longestPalindrome(str){
-//     var palindrome = "";
-//     for(var x=0; x<str.length-1; x++){
-//         var tempPalindrome = str[x];
-//         for(var y=1; y<str.length/2; y++){
-//             if(str[x-y] === str[x+y]){
-//                 tempPalindrome = str[x-y] + tempPalindrome + str[x+y];
-//             } else { break; }
-//         }
-//         if(tempPalindrome.length > palindrome.length) palindrome = tempPalindrome;
-//     }
-//     return palindrome;
-// }
-// console.log(`longestPalindrome("aab")`);
-// console.log(longestPalindrome("aab"));
-// console.log(`longestPalindrome("racecar")`);
-// console.log(longestPalindrome("racecar"));
-// console.log(`longestPalindrome("Dad")`);
-// console.log(longestPalindrome("Dad"));
-// console.log(`longestPalindrome("My favorite racecar erupted!")`);
-// console.log(longestPalindrome("My favorite racecar erupted!"));
-// console.log(`longestPalindrome("teaet asdfghjkjhgfdsa tyuiuyt vvvvbnmfghjhgfmnbvvvv")`);
-// console.log(longestPalindrome("teaet asdfghjkjhgfdsa tyuiuyt vvvvbnmfghjhgfmnbvvvv"));
 
 // =======================================================
 console.log("=======================================")
