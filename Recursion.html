@@ -1,0 +1,204 @@
+<script> 
+    // ====================================================================
+    // Sigma
+    console.log(" - - - sigma - - - ")
+    function sigma(num) {
+        sum = 0;
+        while (num > 0) {
+            sum = sum + num;
+            num--;
+        }
+        return sum;
+    }
+    console.log("sigma( 1 )", sigma(1));
+    console.log("sigma( 2 )", sigma(2));
+    console.log("sigma( 3 )", sigma(3));
+    console.log("sigma( 4 )", sigma(4));
+    console.log("sigma( 5 )", sigma(5));
+
+
+    // ====================================================================
+    // rSigma
+    console.log(" - - - rSigma - - - ")
+    function rSigma(num) {
+        if (num > 0) {
+            return (num + rSigma(--num));
+        }
+        return num
+    }
+    console.log("rSigma( 1 )", rSigma(1));
+    console.log("rSigma( 2 )", rSigma(2));
+    console.log("rSigma( 3 )", rSigma(3));
+    console.log("rSigma( 4 )", rSigma(4));
+    console.log("rSigma( 5 )", rSigma(5));
+
+
+    // ====================================================================
+    // Product 
+    console.log(" - - - product - - - ")
+    function product(num) {
+        if (num > 1) {
+            for (var x = 1, sum = 1; x <= num; x++) {
+                sum = sum * x;
+            }
+            return sum;
+        }
+        return 1;
+    }
+
+    console.log("product( 1 )", product(1))
+    console.log("product( 2 )", product(2))
+    console.log("product( 3 )", product(3))
+    console.log("product( 4 )", product(4))
+    console.log("product( 5 )", product(5))
+
+    // ====================================================================
+    console.log(" - - - rProduct - - - ")
+    function rProduct(num, curr = 1, sum = 1) {
+        if (curr <= num) {
+            sum *= curr;
+            return rProduct(num, ++curr, sum);
+        }
+        return sum;
+    }
+    console.log("rProduct( 1 )", rProduct(1))
+    console.log("rProduct( 2 )", rProduct(2))
+    console.log("rProduct( 3 )", rProduct(3))
+    console.log("rProduct( 4 )", rProduct(4))
+    console.log("rProduct( 5 )", rProduct(5))
+
+
+    // ====================================================================
+    // rFibonacci
+    // 0 1 1 2 3 5 8 13
+    // 0 1 2 3 4 5 6 7
+    console.log(" - - - fibonacci - - - ")
+    function fibonacci(num) {
+        var arr = [0, 1];
+        for (var x = 2; x <= num; x++) {
+            arr[x] = arr[x - 2] + arr[x - 1];
+        }
+        return arr[num];
+    }
+    console.log("fibonacci( 3 )", fibonacci(3));
+    console.log("fibonacci( 4 )", fibonacci(4));
+    console.log("fibonacci( 5 )", fibonacci(5));
+    console.log("fibonacci( 6 )", fibonacci(6));
+
+    console.log(" - - - rFibonacci - - - ")
+
+    function rFibonacci(num) {
+        if (num <= 2) {
+            return 1;
+        }
+        return (rFibonacci(num - 2) + rFibonacci(num - 1));
+
+    }
+    console.log("rFibonacci( 3 )", rFibonacci(3));
+    console.log("rFibonacci( 4 )", rFibonacci(4));
+    console.log("rFibonacci( 5 )", rFibonacci(5));
+    console.log("rFibonacci( 6 )", rFibonacci(6));
+
+
+
+    // ====================================================================
+    // rTrib
+    // 0, 0, 1, 1, 2, 4, 7
+    // 1, 2, 3, 4, 5
+    
+    function trib(num){
+        if(num < 2) return 0;
+        if(num === 2) return 1;
+        return trib(num-1) + trib(num-2) + trib(num-3);
+    }
+
+    console.log("trib(0) -> ", trib(0));
+    console.log("trib(1) -> ", trib(1));
+    console.log("trib(2) -> ", trib(2));
+    console.log("trib(3) -> ", trib(3));
+    console.log("trib(4) -> ", trib(4));
+    console.log("trib(5) -> ", trib(5));
+    console.log("trib(6) -> ", trib(6));
+    console.log("trib(7) -> ", trib(7));
+
+
+
+
+
+
+
+    // ====================================================================
+    // rBinarySearch
+    console.log(" - - - rBinarySearch - - - ")
+    function rBinarySearch(arr, num, left = 0, right = arr.length - 1) {
+        var middle = Math.floor((left + right) / 2);
+        // console.log("arr: " + arr)
+        // console.log("IDX: " + [0,1,2,3,4,5,6])
+        // console.log("num: ", num)
+        // console.log("left: ", left)
+        // console.log("middle: ", middle)
+        // console.log("right: ", right)
+        if (num === arr[middle] || num === arr[left] || num === arr[right]) return true;
+        else if (middle === left || middle === right) return false;
+        else if (num < arr[middle]) return rBinarySearch(arr, num, left, middle)
+        else if (arr[middle] < num) return rBinarySearch(arr, num, middle, right)
+    }
+
+
+    console.log("rBinarySearch( [1,2,3,5,6,8], 1 )", rBinarySearch([1, 2, 3, 5, 6, 8], 1))
+    console.log("rBinarySearch( [1,2,3,5,6,8], 2 )", rBinarySearch([1, 2, 3, 5, 6, 8], 2))
+    console.log("rBinarySearch( [1,2,3,5,6,8], 3 )", rBinarySearch([1, 2, 3, 5, 6, 8], 3))
+    console.log("rBinarySearch( [1,2,3,5,6,8], 4 )", rBinarySearch([1, 2, 3, 5, 6, 8], 4))
+    console.log("rBinarySearch( [1,2,3,5,6,8], 5 )", rBinarySearch([1, 2, 3, 5, 6, 8], 5))
+    console.log("rBinarySearch( [1,2,3,5,6,8], 6 )", rBinarySearch([1, 2, 3, 5, 6, 8], 6))
+    console.log("rBinarySearch( [1,2,3,5,6,8], 7 )", rBinarySearch([1, 2, 3, 5, 6, 8], 7))
+    console.log("rBinarySearch( [1,2,3,5,6,8], 8 )", rBinarySearch([1, 2, 3, 5, 6, 8], 8))
+    console.log("rBinarySearch( [1,2,3,5,6,7,8], 9 )", rBinarySearch([1, 2, 3, 5, 6, 7, 8], 9))
+    console.log("rBinarySearch( [1,2,3,5,6,7,8], 0 )", rBinarySearch([1, 2, 3, 5, 6, 7, 8], 0))
+    console.log("rBinarySearch( [1,2,3,5,6,7,8], -1 )", rBinarySearch([1, 2, 3, 5, 6, 7, 8], -1))
+
+
+
+
+
+
+    // ====================================================================
+    // binaryStringExpansion
+    function binaryStringExpansion(str) {
+        var arrOfLetters = str.split(""); // "a", "b", "c"
+
+        function r(arrOfLetters, tempStr = "") {
+            for (var count = 0; count < arrOfLetters.length; count++) {
+                tempStr += arrOfLetters[arrOfLetters.length - 1];
+                arrOfLetters.pop();
+            }
+        }
+    }
+    console.log(binaryStringExpansion('abc'));
+
+
+
+    // function floodFill(canvas2D, startXY, newColor) {
+    //     var x = startXY[0];
+    //     var y = startXY[1];
+    //     var mark = canvas2D[y][x];
+    //     fill(x, y);
+    //     function fill(x, y) {
+    //         if (canvas2D[y][x] !== mark) { return; }
+    //         canvas2D[y][x] = newColor;
+    //         // current position - 1 y to go up
+    //         if (y - 1 >= 0) fill(x, y - 1);
+
+    //         if (y - 1 >= 0 && x - 1 >= 0) fill(x - 1, y - 1);
+    //         // current position + 1 y to go down
+    //         if (y + 1 < canvas2D.length) fill(x, y + 1);
+    //         // current position - 1 x to go left
+    //         if (x - 1 >= 0) fill(x - 1, y);
+    //         // current position + 1 x to go right
+    //         if (x + 1 < canvas2D[y].length) fill(x + 1, y);
+    //     }
+    // }
+
+
+
+</script>

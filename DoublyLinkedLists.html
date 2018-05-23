@@ -1,0 +1,247 @@
+<script>
+    function dList() {    
+        this.counter = 1;    
+        this.head = null;
+        this.tail = null;
+        this.valid = function(){
+            this.counter++;
+        }
+        this.prependVal = function(){
+            
+        }
+        this.display = function(){
+            
+        }
+    }
+    function dlNode(value) {
+        if (!(this instanceof dlNode)) { return new dlNode(value); }
+        this.val = value;
+        this.prev = null;
+        this.next = null;
+    }
+
+    var node1 = new dlNode(1);
+    var node2 = new dlNode(2);
+    var node3 = new dlNode(3);
+    var node4 = new dlNode(4);
+    
+    var newList = new dList();
+    // var yourlist = new dList();
+    // yourlist.valid();
+    // console.log(mylist);
+    // console.log(yourlist);
+    // node1.next = node2; // 1's next
+    // node1.prev = null; // 1's prev
+
+    // node2.next = node3; // 2's next
+    // node2.prev = node1; // 2's prev
+
+    // node3.next = node4; // 3's next
+    // node3.prev = node2; // 3's prev
+
+    // node4.next = null; // 4' next
+    // node4.prev = node3; // 4' prev
+
+    // mylist.head = node1;
+    // mylist.tail = node4;
+
+    // console.log(mylist);
+
+    // console.log(mylist.head);
+    // console.log(mylist.tail);
+    // console.log(mylist.valid);
+    // mylist.prependVal();
+
+  
+
+
+function isValid(list) {
+//  debugger;
+   var valid = false;
+   var current = list.head;
+   // console.log(current);
+   if((list.head && list.tail) || (!list.head && !list.tail)) {
+     valid = true;
+     console.log(valid);
+   }
+
+   if(list.head && list.tail) {
+       if(list.head.prev !== null && list.tail.next !== null) {
+         valid = false;
+         console.log(valid);
+       }
+   }
+
+   while(current && current.next) {
+     console.log(current.val + "---" + current.next.val);
+       if(current.next.prev !== current) {
+         valid = false;
+         console.log(valid);
+         console.log(current.next.val + " has no .prev");
+       }
+       if(current.next === null && current != list.tail){
+         valid = false;
+         console.log(valid);
+         console.log(current.val + "has no .next and it is not this.tail");
+       }
+       current = current.next;
+       console.log(current.val + "---" + current.next.val);
+   }
+   return valid ? "this is a valid list" : "this is NOT a valid list";
+}
+
+console.log(newList);
+console.log(isValid(newList));
+
+
+
+
+function prependValue(list, newVal, findVal){
+    var current; // 
+    var newNode;
+    var after;
+    var before;
+
+    newNode = new dlNode(newVal);
+    // console.log("newNode instanceof dlNode: ", list instanceof dList);
+    console.log(newNode);
+    if(list){
+        current = list.head
+        while(current){
+            if(current.val === findVal){
+                if(current === list.tail){
+                    
+                } else {
+                    after = current;
+                    before = current.prev;
+                    before.next = newNode;
+                    newNode.prev = before;
+                    newNode.next = after;
+                    after.prev = newNode;
+                }
+                return true;
+            }
+            current = current.next;
+        }
+    }
+    return false;
+}
+prependValue(mylist, 9, 4);
+
+
+
+
+
+
+
+
+
+
+
+// NEW NEW NEW
+function dList(){
+    this.head = null;
+    this.tail = null;
+}
+function dLNode(val){
+    this.val = val;
+    this.next = null;
+    this.prev = null;
+}
+
+var node1 = new dLNode(1);
+var node2 = new dLNode(2);
+var node3 = new dLNode(3);
+var node4 = new dLNode(4);
+node1.next = node2;
+node2.next = node3;
+node3.next = node4;
+node4.prev = node3;
+node3.prev = node2;
+node2.pre = node1;
+var dlist = new dList();
+dlist.head = node1;
+dlist.tail = node4;
+console.log(dlist);
+
+prependValue(dlist, 99, 3);
+function prependValue(dlist, val, mark) {
+    if(dlist && dlist.head){
+        var newNode = new dLNode(val);
+        if(dlist.head.val === mark){
+            // insert before head;
+            let temp = dlist.head;
+            dlist.head = newNode;
+            newNode.enxt = temp;
+            temp.prev = newNode;
+            return true;
+        } 
+        var current = dlist.head;
+        while(current.next){
+            if(current.next.val === mark){
+                let temp = current.next;
+                current.next = newNode;
+                newNode.prev = current;
+                newNode.next = temp;
+                temp.prev = newNode;
+                return true;
+            }
+            current = current.next;
+        }
+    }
+    return false;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function prependValue(list, newVal, exiVal ){
+//     if(list && list.head){
+//         var curr = list.head;
+//         while (curr) {
+//             if(curr.val === exiVal){
+//                 var newNode = new dlNode(newVal);
+//                 if(curr !== list.head){
+//                     beforeNode = curr.prev;
+//                     beforeNode.next = newNode;
+//                     afterNode = curr;
+//                     newNode.prev = beforeNode;
+//                     newNode.next = afterNode;
+//                     afterNode.prev = newNode;
+//                 } else {
+//                     list.head = newNode;
+//                     afterNode = curr;
+//                     newNode.prev = null;
+//                     newNode.next = afterNode;
+//                     afterNode.prev = list.head;
+//                 }
+//                 return true;
+//             }
+//             curr = curr.next
+//         }
+//         return false;
+//     }
+// }
+// console.log(prependValue(mylist, 9, 1));
+
+</script>

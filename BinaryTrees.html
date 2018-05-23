@@ -1,0 +1,174 @@
+<script>
+function BtNode(value) {
+    this.val = value;
+    this.left = null;
+    this.right = null;
+    this.add = function(newNode) {
+        console.log(this);
+        if(newNode.val < this.val){ // left
+            if(this.left){ // left node already exists
+                this.left.add(newNode);
+            } else { // left node does not exist, so we asign
+                this.left = newNode;
+            }
+        } else if (newNode.val >= this.val){ // right
+            if(this.right){ // right node already exists
+                this.right.add(newNode);
+            } else { // right node does not exist, so we asign
+                this.right = newNode;
+            }
+        }
+        return this;
+    }
+}
+
+function Bst() {
+    this.root = null;
+    this.add = function(val){
+        var newNode = new BtNode(val);
+        if(this.root) {
+            var curr = this.root;
+            while(curr){
+                if(newNode.val >= curr.val) { // right
+                    if(curr.right){ // continue right
+                        curr = curr.right;
+                    } else { // add to the right
+                        curr.right = newNode;
+                        break;
+                    }
+                } else if (newNode.val < curr.val){ // left
+                    if(curr.left){
+                        curr = curr.left;
+                    } else {
+                        curr.left = newNode;
+                        break;
+                    }
+                }
+            }
+        } else {
+            this.root = newNode;
+        }
+    }
+    this.rAdd = function(val){
+        var newNode = new BtNode(val);
+        if(this.root){
+            rFindandAdd(this.root);
+            function rFindandAdd(curr){
+                if(newNode.val < curr.val){ // left
+                    if(curr.left){ // left node already exists
+                        rFindandAdd(curr.left);
+                    } else { // left node does not exist, so we asign
+                        curr.left = newNode;
+                    }
+                } else if (newNode.val >= curr.val){ // right
+                    if(curr.right){ // right node already exists
+                        rFindandAdd(curr.right);
+                    } else { // right node does not exist, so we asign
+                        curr.right = newNode;
+                    }
+                }
+            }
+
+        } else {
+            this.root = newNode;
+        }
+        
+    }
+    this.jasonAdd = function(val){
+        var newNode = new BtNode(val);
+        if(this.root){
+            this.root.add(newNode);
+        } else {
+            this.root = newNode;
+        }
+        return this;
+    }
+    this.size = function() {
+        var curr = null;
+        var size = 0;
+        if(this.root){
+            curr = this.root; 
+            rDown(curr);
+            function rDown(curr) {
+                if(curr){
+                    size++;
+                    if(curr.left){
+                        rDown(curr.left);
+                    }
+                    if(curr.right){
+                        rDown(curr.right);
+                    }
+                }
+            }
+
+        }
+        return size;
+    }
+    this.isValid = function(){
+        
+    }
+    this.traverse = function(){
+        var counter = 0;
+        recurse(this.root);
+        return counter;
+        function recurse(node) {
+            if(!node) return; 
+            counter++;
+            recurse(node.left);
+            recurse(node.right);
+        }
+    }
+
+}
+
+
+var bstObject = new Bst();
+bstObject.add(10)
+bstObject.add(5)
+bstObject.add(20)
+bstObject.add(3)
+bstObject.add(8)
+bstObject.add(15)
+bstObject.add(30)
+bstObject.traverse();
+
+// <!-- 
+// var canvas = [
+//     [3,2,3,4,3],
+//     [2,3,3,4,0],
+//     [7,3,3,4,1],
+//     [6,5,3,4,1],
+//     [1,2,3,3,3]
+// ]
+// console.log(canvas.toString());
+// floodFill(canvas,[2,2], 9);
+// console.log(canvas.toString());
+// console.log(canvas);
+// function floodFill(canvas, startXY, newColor, oldColor){
+//     console.log("floodFill")
+//     var x = startXY[0]; // column, 2
+//     var y = startXY[1]; // row, 2
+//     if(!oldColor){
+//         oldColor = canvas[y][x];
+//     }
+//     if(canvas[y][x] !== oldColor){ // BASE CASE
+//         return;
+//     }
+//     canvas[y][x] = newColor; 
+//     // FORWARD PROGRESSION 
+//     if (y-1 >= 0){
+//         floodFill(canvas, [x,y-1], newColor, oldColor); // UP
+//     }
+//     if (y+1 < canvas.length){
+//         floodFill(canvas, [x,y+1], newColor, oldColor); // DOWN
+//     }
+//     if (x+1 < canvas[y].length){
+//         floodFill(canvas, [x+1,y], newColor, oldColor); // RIGHT
+//     }
+//     if (x-1 >= 0){
+//         floodFill(canvas, [x-1,y], newColor, oldColor); // LEFT
+//     }
+
+    
+// } -->
+</script>

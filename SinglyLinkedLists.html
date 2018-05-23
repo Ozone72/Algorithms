@@ -1,0 +1,135 @@
+<script>
+    // Regular
+    function SLNode(val) {
+        this.val = val;
+        this.next = null;
+        this.removeSelf = function () {
+            console.log("removeself");
+            //....
+            this
+        }
+        this.interleave = function () {
+            var current = this.head;
+            // Find the size
+            var size = 0;
+            while (current) {
+                size++;
+                current = current.next;
+            }
+            console.log(size);
+            // Find the midpoint
+            var midPosition = Math.ceil(size / 2);
+            var list2 = this.head;
+            while (midPosition--) {
+                list2 = list2.next;
+            }
+            console.log(current);
+            // list 1 / list 2
+            var midPosition = Math.ceil(size / 2);
+            list1 = this.head;
+            console.log(list1)
+            console.log(list2)
+            while (true) {
+                var temp1 = list1.next;
+                list1.next = list2;
+                if (list2 === this.tail) return;
+                var temp2 = list2.next;
+                list2.next = temp1;
+                list1 = temp1;
+                list2 = temp2;
+            }
+
+        }
+        this.isPalindrome = function () {
+            // traverse through the queue from head to tail
+            var current = this.head;
+            var counter = 0;
+            var stack = [];
+            while (current) {
+                // count up each step
+                counter++;
+                // push to stack    
+                stack.push(current.val);
+                current = current.next;
+            }
+            // reset current to this.head
+            current = this.head;
+            var half = Math.floor(counter / 2)
+            // traverse throught he queue up to the mid point
+            for (var i = 0; i < half; i++) {
+                if (current.val != stack.pop()) {
+                    return false;
+                }
+                current = current.next;
+            }
+            return true;
+        }
+        // ...
+    }
+    // Prototype
+    function SLNode(val) {
+        this.val = val;
+        this.next = null;
+        // ...
+    }
+    SLNode.prototype.removeSelf = function () {
+        console.log("removeself");
+        //....
+    }
+    SLNode.prototype.doSomething = function () {
+        console.log("removeself");
+        //....
+    }
+    SLNode.prototype.otherStuff = function () {
+        console.log("removeself");
+        //....
+    }
+
+
+
+
+    function SLQueue() {
+        this.head = null;
+        // ...other properties...
+    }
+    var node1 = new SLNode(1);
+    var node2 = new SLNode(2);
+    var node3 = new SLNode(3);
+    var node4 = new SLNode(4);
+    var node5 = new SLNode(5);
+    node1.next = node2;
+    node2.next = node3;
+    node3.next = node4;
+    node4.next = node5;
+
+    var list = new SLQueue();
+    list.head = node1;
+
+    console.log(node1);
+    console.log(node2);
+
+
+    queue1n1 = new SLNode(1)
+    queue1n2 = new SLNode(2)
+    queue1n3 = new SLNode(3)
+    queue1n4 = new SLNode(2)
+    queue1n5 = new SLNode(1)
+    
+    queue1 = new SLQueue();
+    queue1n1.next = queue1n2;
+    queue1n2.next = queue1n3;
+    queue1n3.next = queue1n4;
+    queue1n4.next = queue1n5;
+    // queue1n5.next = queue1n6;
+    queue1.head = queue1n1;
+    queue1.tail = queue1n5;
+    console.log( queue1.isPalindrome() );
+    // queue1.interleave();
+
+
+
+
+
+
+
+</script>

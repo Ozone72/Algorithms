@@ -1,0 +1,125 @@
+<script>
+function btNode(value) {
+    this.val = value;
+    this.left = null;
+    this.right = null;
+}
+
+function bst() {
+    this.root = null;
+    this.add = function(val) {
+        var newbtNode = new btNode(val);
+        if(this.root) {
+            
+            function findAndInsert(curr){
+            if(newbtNode.val < curr.val){ // left
+                if (curr.left) {
+                    return findAndInsert(curr.left); 
+                } 
+                else {
+                    curr.left = newbtNode; 
+                }
+            } else if (newbtNode.val >= curr.val){ // right
+                if (curr.right) {
+                    return findAndInsert(curr.right); 
+                }
+                else {
+                    curr.right = newbtNode; 
+                }
+            }
+            }
+            findAndInsert(this.root);
+
+        } else {
+            this.root = newbtNode
+        }
+    }
+    this.remove = function(val) {
+        var curr;
+        if (curr = this.root){ return recursive(curr); }
+        function recursive(curr) {
+            if(curr){
+                if(curr.val === val){ 
+                    curr.val = null; 
+                    return true;
+                } 
+                return (recursive(curr.left) || recursive(curr.right)) 
+            } 
+            return false;
+        }
+    }
+    this.removeAll = function() {
+        var curr;
+        if(curr = this.root) {
+            recursive(curr);
+            function recursive(curr) {
+                if(curr) { 
+                    curr.val = null; 
+                    recursive(curr.left) ;
+                    recursive(curr.right);
+                }
+            }
+        } 
+        return;
+    }
+    this.isValid = function() {
+        var curr = null;
+        if(this.root){
+            curr = this.root;
+            return rDown(curr);
+            function rDown(curr, leftLimit=Number.MIN_VALUE, rightLimit=Number.MAX_VALUE) {
+                // console.log("VAL: ", curr.val)
+                // console.log("LEFT: ", leftLimit)
+                // console.log("RIGHT: ", rightLimit)
+                if(curr.left){ 
+                    // console.log(curr.left.val)
+                    if(curr.left.val < curr.val && curr.left.val >= leftLimit) {
+                        // console.log("TRUE")
+                        return rDown(curr.left, leftLimit, curr.val)
+                    }
+                    // console.log("FALSE")
+                    return false;
+                }
+
+                if(curr.right){ 
+                    // console.log(curr.right.val)
+                    if(curr.right.val >= curr.val && curr.right.val < rightLimit) {
+                        // console.log("TRUE")
+                        return rDown(curr.right, curr.val, rightLimit)
+                    }
+                    // console.log("FALSE")
+                    return false;
+                }
+
+                return true;
+            }
+        } 
+        // return true;
+    }
+}
+
+var node5 = new btNode(5);
+var bstree = new bst();
+bstree.root = node5;
+bstree.add(3)
+bstree.add(7)
+bstree.add(1)
+bstree.add(9)
+bstree.add(4)
+bstree.add(6)
+
+console.log(bstree);
+// console.log(bstree.remove(6));
+// console.log(bstree.remove(9));
+// console.log(bstree.remove(1));
+// console.log(bstree.remove(8));
+// console.log(bstree.remove(10));
+// console.log(bstree.remove(0));
+
+bstree.removeAll();
+
+
+console.log(bstree);
+
+
+</script>
